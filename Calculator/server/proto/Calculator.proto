@@ -1,0 +1,33 @@
+syntax = "proto3";
+
+//option java_multiple_files = true;
+//option java_package = "io.grpc.examples.calculator";
+//option java_outer_classname = "calculatorProto";
+//option objc_class_prefix = "HLW";
+
+//this is namespace in c++ 
+package calculatorPackage;
+
+service calculatorService {
+  rpc Add (CalculatorRequest) returns (CalculatorReply) {}
+	rpc Substract (CalculatorRequest) returns (CalculatorReply) {}
+	rpc Multiply (CalculatorRequest) returns (CalculatorReply) {}
+	rpc Divide (CalculatorRequest) returns (CalculatorReply) {}
+}
+
+message CalculatorRequest {
+  double number1 = 1;
+  double number2 = 2;
+}
+
+message CalculatorReply {
+  double result = 1;
+}
+
+//protoc --cpp_out=. Calculator.proto 
+//protoc --grpc_out=. --plugin=protoc-gen-grpc="C:\DEV\vcpkg\packages\grpc_x64-windows\tools\grpc\grpc_cpp_plugin.exe" Calculator.proto
+//cd .. 
+//NOTE: move the proto result to in src 
+//cmake -DCMAKE_TOOLCHAIN_FILE=C:\DEV\vcpkg\scripts\buildsystems\vcpkg.cmake
+//cmake --build .
+//cmake -G "Visual Studio 17 2022" -A x64 ../ -DCMAKE_TOOLCHAIN_FILE=C:\DEV\vcpkg\scripts\buildsystems\vcpkg.cmake
