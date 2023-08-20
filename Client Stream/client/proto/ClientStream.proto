@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+
+package C_Stream;
+
+service ServiceStream {
+  rpc SendMessage (stream StreamRequest) returns (StreamReply) {}
+}
+
+message StreamRequest {
+  string message =1;
+}
+
+message StreamReply {
+  uint64 val = 1;
+  string message = 2;
+}
+
+//protoc --cpp_out=. ClientStream.proto 
+//protoc --grpc_out=. --plugin=protoc-gen-grpc="C:\DEV\vcpkg\packages\grpc_x64-windows\tools\grpc\grpc_cpp_plugin.exe" ClientStream.proto
+//cmake -DCMAKE_TOOLCHAIN_FILE=C:\DEV\vcpkg\scripts\buildsystems\vcpkg.cmake
+//cmake --build .
+//cmake -G "Visual Studio 17 2022" -A x64 ../ -DCMAKE_TOOLCHAIN_FILE=C:\DEV\vcpkg\scripts\buildsystems\vcpkg.cmake
