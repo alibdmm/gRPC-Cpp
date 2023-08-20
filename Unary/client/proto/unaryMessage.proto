@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "io.grpc.examples.unaryMessage";
+option java_outer_classname = "unaryMessageProto";
+option objc_class_prefix = "HLW";
+
+package message;
+
+service Message {
+  rpc SendMessage (MessageRequest) returns (MessageReply) {}
+}
+
+message MessageRequest {
+  string name = 1;
+  string message =2;
+}
+
+message MessageReply {
+  string message = 1;
+}
+
+//protoc --cpp_out=. unaryMessage.proto 
+//protoc --grpc_out=. --plugin=protoc-gen-grpc="C:\DEV\vcpkg\packages\grpc_x64-windows\tools\grpc\grpc_cpp_plugin.exe" unaryMessage.proto
+//cmake -DCMAKE_TOOLCHAIN_FILE=C:\DEV\vcpkg\scripts\buildsystems\vcpkg.cmake
+//cmake --build .
+//cmake -G "Visual Studio 17 2022" -A x64 ../ -DCMAKE_TOOLCHAIN_FILE=C:\DEV\vcpkg\scripts\buildsystems\vcpkg.cmake
